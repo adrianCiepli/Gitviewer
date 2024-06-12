@@ -1,0 +1,154 @@
+package controller;
+
+/**
+ * @author Adrian Cieplicki
+ * date 06/12/2024
+ * The controller for the registration scene
+ */
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import data.Database;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+/**
+ * Main Controller Class
+ */
+public class MainController implements Initializable {
+
+	// FXML object injection
+	@FXML private Label header;
+	@FXML private Rectangle headerRect;
+	@FXML private TextField userField;
+	@FXML private Rectangle userRect;
+	@FXML private PasswordField passField;
+	@FXML private Rectangle passRect;
+	
+	// Methods and objects to run and initialize on startup
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		// Have the header of the registration scene fade in
+		FadeTransition headerFade = new FadeTransition();
+		headerFade.setNode(header);
+		headerFade.setFromValue(0.0);
+		headerFade.setToValue(1.0);
+		headerFade.setDuration(Duration.seconds(2.0));
+		headerFade.play();
+		
+		// Have a cosmetic rectangle under the header fade in with it, slightly slower
+		FadeTransition headerRectFade = new FadeTransition();
+		headerRectFade.setNode(headerRect);
+		headerRectFade.setFromValue(0.0);
+		headerRectFade.setToValue(1.0);
+		headerRectFade.setDuration(Duration.seconds(3.0));
+		headerRectFade.play();
+		
+	}
+	
+	/**
+	 * Displays a line under the username field when the field is clicked on
+	 */
+	public void userClickOn() {
+		// Fade in animation for the username field line
+		FadeTransition fade = new FadeTransition();
+		fade.setNode(userRect);
+		fade.setFromValue(0.0);
+		fade.setToValue(1.0);
+		fade.setDuration(Duration.seconds(0.15));
+		fade.play();
+		
+		// Fade out the password field line if it is currently displayed when the username field is clicked on
+		if (passRect.getOpacity() == 1.0) {
+			FadeTransition passUser = new FadeTransition();
+			passUser.setNode(passRect);
+			passUser.setFromValue(1.0);
+			passUser.setToValue(0.0);
+			passUser.setDuration(Duration.seconds(0.15));
+			passUser.play();
+		}
+	}
+	
+	/**
+	 * Displays a line under the password field when the field is clicked on
+	 */
+	public void passClickOn() {
+		// Fade in animation for the password field line
+		FadeTransition fade = new FadeTransition();
+		fade.setNode(passRect);
+		fade.setFromValue(0.0);
+		fade.setToValue(1.0);
+		fade.setDuration(Duration.seconds(0.15));
+		fade.play();
+		
+		// Fade out the username field line if it is currently displayed when the password field is clicked on
+		if (userRect.getOpacity() == 1.0) {
+			FadeTransition fadeUser = new FadeTransition();
+			fadeUser.setNode(userRect);
+			fadeUser.setFromValue(1.0);
+			fadeUser.setToValue(0.0);
+			fadeUser.setDuration(Duration.seconds(0.15));
+			fadeUser.play();
+		}
+	}
+	
+	/**
+	 * Fades out any currently displaying field lines if the user clicks anywhere  on the background of the scene
+	 */
+	public void userClickOff() {
+		// Create fade animation objects for both the username and password field lines
+		FadeTransition fadeUser = new FadeTransition();
+		FadeTransition fadePass = new FadeTransition();
+		
+		// Check if the username rectangle is opaque and fades if necessary
+		if (userRect.getOpacity() == 1.0) {
+			fadeUser.setNode(userRect);
+			fadeUser.setFromValue(1.0);
+			fadeUser.setToValue(0.0);
+			fadeUser.setDuration(Duration.seconds(0.5));
+			fadeUser.play();
+		}
+		
+		// Check if the username rectangle is opaque and fades if necessary
+		if (passRect.getOpacity() == 1.0) {
+			fadePass.setNode(passRect);
+			fadePass.setFromValue(1.0);
+			fadePass.setToValue(0.0);
+			fadePass.setDuration(Duration.seconds(0.5));
+			fadePass.play();
+		}
+	}
+	
+	/**
+	 * Gets and saves the inputted username and password and switches scenes to the login scene
+	 * @param event Event object for when the method is called by the register button being pressed
+	 * @throws IOException Do not load an fxml file that does not exist
+	 */
+	public void register(ActionEvent event) throws IOException {
+		// Save the username and password in the database
+		Database.username = userField.getText();
+		Database.password = passField.getText();
+		
+		// Show the login scene
+		Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+		Stage appstage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Scene scene = new Scene(root);
+		appstage.setScene(scene);
+	
+	}
+
+}

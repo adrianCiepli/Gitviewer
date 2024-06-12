@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="882.0" style="-fx-background-color: #545454;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GitController">
+   <children>
+      <WebView fx:id="webView" layoutX="55.0" layoutY="62.0" prefHeight="506.0" prefWidth="772.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="14.0" layoutY="15.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="111.0" layoutY="-82.0" rotate="90.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="861.0" layoutY="415.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="764.0" layoutY="512.0" rotate="90.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
+      <Label fx:id="msgLabel" layoutX="248.0" layoutY="14.0" rotate="-10.0" text="Best GitHub NA" textFill="#ff5be9">
+         <font>
+            <Font name="Comic Sans MS" size="29.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
